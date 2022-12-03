@@ -1,21 +1,25 @@
-// document.querySelector('.w').addEventListener('click', function () {
-//   alert('I got clicked W!')
-// })
+//Detecting keyboard Press
 
 document.addEventListener('keydown', function (event) {
   let keyPressed = event.key
   soundKey(keyPressed)
+  buttonAnimation(keyPressed)
 })
+
+//Detecting mouse clicked
 
 for (var i = 0; i < document.querySelectorAll('.drum').length; i++) {
   document.querySelectorAll('.drum')[i].addEventListener('click', function () {
     var buttonClick = this.innerHTML
     soundKey(buttonClick)
+    buttonAnimation(buttonClick)
   })
 }
 
-function soundKey(letterKey) {
-  switch (letterKey) {
+//Play the sound accordingly with the letter
+
+function soundKey(Key) {
+  switch (Key) {
     case 'w':
       var tom1 = new Audio('sounds/tom-1.mp3')
       tom1.play()
@@ -47,4 +51,14 @@ function soundKey(letterKey) {
     default:
       break
   }
+}
+
+function buttonAnimation(key) {
+  let button = document.querySelector('.' + key)
+
+  button.classList.add('pressed')
+
+  setTimeout(function () {
+    button.classList.remove('pressed')
+  }, 1000)
 }
